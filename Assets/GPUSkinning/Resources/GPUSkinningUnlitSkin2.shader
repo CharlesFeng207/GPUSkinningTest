@@ -1,4 +1,6 @@
-﻿Shader "GPUSkinning/GPUSkinning_Unlit_Skin2"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "GPUSkinning/GPUSkinning_Unlit_Skin2"
 {
 	Properties
 	{
@@ -15,6 +17,7 @@
 		float2 uv : TEXCOORD0;
 		float4 uv2 : TEXCOORD1;
 		float4 uv3 : TEXCOORD2;
+		float3 normal : NORMAL;
 		UNITY_VERTEX_INPUT_INSTANCE_ID
 	};
 
@@ -45,12 +48,31 @@
 		fixed4 col = tex2D(_MainTex, i.uv);
 		return col;
 	}
+
+	fixed4 frag_xray(v2f i) : SV_Target
+	{
+		return fixed4(0, 0, 1, 0.5);
+	}
+
 	ENDCG
 
 	SubShader
 	{
 		Tags { "RenderType" = "Opaque" }
 		LOD 200
+		
+		Pass
+		{
+			Blend SrcAlpha One
+			ZWrite Off
+			ZTest Greater
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag_xray
+			#pragma multi_compile_instancing
+			#pragma multi_compile ROOTON_BLENDOFF ROOTON_BLENDON_CROSSFADEROOTON ROOTON_BLENDON_CROSSFADEROOTOFF ROOTOFF_BLENDOFF ROOTOFF_BLENDON_CROSSFADEROOTON ROOTOFF_BLENDON_CROSSFADEROOTOFF
+			ENDCG
+		}
 
 		Pass
 		{

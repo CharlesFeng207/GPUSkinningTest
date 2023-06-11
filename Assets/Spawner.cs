@@ -15,7 +15,6 @@ public class Spawner : MonoBehaviour
         {
             var go = Instantiate(Prefab, transform); 
             go.transform.localPosition = Random.insideUnitSphere * Range;
-            go.transform.localRotation = Random.rotation;
         }
     }
 
