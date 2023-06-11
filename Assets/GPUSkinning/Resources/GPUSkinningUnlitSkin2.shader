@@ -17,7 +17,6 @@ Shader "GPUSkinning/GPUSkinning_Unlit_Skin2"
 		float2 uv : TEXCOORD0;
 		float4 uv2 : TEXCOORD1;
 		float4 uv3 : TEXCOORD2;
-		float3 normal : NORMAL;
 		UNITY_VERTEX_INPUT_INSTANCE_ID
 	};
 

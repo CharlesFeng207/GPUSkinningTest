@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
     {
         for(int i = 0; i < Count;i ++)
         {
-            var go = Instantiate(Prefab, transform); 
+            var go = Instantiate(Prefab, transform);
             go.transform.localPosition = Random.insideUnitSphere * Range;
         }
     }
