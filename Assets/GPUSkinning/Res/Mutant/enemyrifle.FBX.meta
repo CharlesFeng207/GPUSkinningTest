@@ -56,7 +56,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -114,7 +115,27 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: enemyrifle(Clone)
+      parentName: 
+      position: {x: 0.06272086, y: -0.073718525, z: -0.120902}
+      rotation: {x: -0.037673116, y: 0.03386577, z: -0.15433149, w: 0.98671967}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Muzzle
+      parentName: enemyrifle(Clone)
+      position: {x: -0.13816918, y: 0.038604688, z: 0.7250846}
+      rotation: {x: 0.03767315, y: -0.033865824, z: 0.1543316, w: 0.98671967}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+    - name: Shoot
+      parentName: enemyrifle(Clone)
+      position: {x: -0.11293065, y: 0.06360987, z: 0.32322285}
+      rotation: {x: 0.03767315, y: -0.033865824, z: 0.1543316, w: 0.98671967}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+    - name: shellparticle
+      parentName: enemyrifle(Clone)
+      position: {x: -0.126737, y: 0.15263322, z: 0.14773163}
+      rotation: {x: 0.03767315, y: -0.033865824, z: 0.1543316, w: 0.98671967}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

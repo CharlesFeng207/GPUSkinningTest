@@ -36,7 +36,6 @@ Shader "GPUSkinning/GPUSkinning_Unlit_Skin2"
 		v2f o;
 		
 		float4 pos = skin2(v.vertex, v.uv2, v.uv3);
-
 		o.vertex = UnityObjectToClipPos(pos);
 		o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 		return o;
@@ -60,18 +59,18 @@ Shader "GPUSkinning/GPUSkinning_Unlit_Skin2"
 		Tags { "RenderType" = "Opaque" }
 		LOD 200
 		
-		Pass
-		{
-			Blend SrcAlpha One
-			ZWrite Off
-			ZTest Greater
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag_xray
-			#pragma multi_compile_instancing
-			#pragma multi_compile ROOTON_BLENDOFF ROOTON_BLENDON_CROSSFADEROOTON ROOTON_BLENDON_CROSSFADEROOTOFF ROOTOFF_BLENDOFF ROOTOFF_BLENDON_CROSSFADEROOTON ROOTOFF_BLENDON_CROSSFADEROOTOFF
-			ENDCG
-		}
+		// Pass
+		// {
+		// 	Blend SrcAlpha One
+		// 	ZWrite Off
+		// 	ZTest Greater
+		// 	CGPROGRAM
+		// 	#pragma vertex vert
+		// 	#pragma fragment frag_xray
+		// 	#pragma multi_compile_instancing
+		// 	#pragma multi_compile ROOTON_BLENDOFF ROOTON_BLENDON_CROSSFADEROOTON ROOTON_BLENDON_CROSSFADEROOTOFF ROOTOFF_BLENDOFF ROOTOFF_BLENDON_CROSSFADEROOTON ROOTOFF_BLENDON_CROSSFADEROOTOFF
+		// 	ENDCG
+		// }
 
 		Pass
 		{
