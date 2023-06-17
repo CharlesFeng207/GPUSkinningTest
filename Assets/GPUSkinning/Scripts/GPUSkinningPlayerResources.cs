@@ -15,6 +15,9 @@ public class GPUSkinningPlayerResources
         Count = 6
     }
 
+    public static bool EnableInstancing = true;
+
+
     public GPUSkinningAnimation anim = null;
 
     public Mesh mesh = null;
@@ -280,7 +283,7 @@ public class GPUSkinningPlayerResources
             mtrls[i] = new GPUSkinningMaterial() { material = new Material(originalMaterial) };
             mtrls[i].material.name = keywords[i];
             mtrls[i].material.hideFlags = hideFlags;
-            mtrls[i].material.enableInstancing = true; // enable instancing in Unity 5.6
+            mtrls[i].material.enableInstancing = EnableInstancing; // enable instancing in Unity 5.6
             EnableKeywords(i, mtrls[i]);
         }
     }
