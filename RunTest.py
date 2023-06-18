@@ -12,7 +12,7 @@ def test(pkgname):
 
 def run():
     os.system("adb shell am start -n com.gpuskin.test/com.gpuskin.test.MainActivity")
-    sleep(5)
+    sleep(10)
     os.system("adb shell am force-stop com.gpuskin.test")
     pass
 

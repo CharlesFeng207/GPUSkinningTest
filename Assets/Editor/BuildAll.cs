@@ -34,15 +34,15 @@ public static class BuildAll
         Tester.Count = 100;
         Tester.Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Mannequin.prefab");
         PlayerSettings.gpuSkinning = false;
-        // Build("Mannequin-CPUSkin");
+        Build("Mannequin-CPUSkin");
         PlayerSettings.gpuSkinning = true;
-        // Build("Mannequin-ComputeSkin");
+        Build("Mannequin-ComputeSkin");
 
         Tester.Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/MannequinGPU.prefab");
         Tester.EnableInstancing = false;
-        // Build("Mannequin-GPUSkin");
+        Build("Mannequin-GPUSkin");
         Tester.EnableInstancing = true;
-        // Build("Mannequin-GPUSkin-Batched");
+        Build("Mannequin-GPUSkin-Batched");
 
         RunTest();
     }
