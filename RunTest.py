@@ -2,6 +2,7 @@ import os
 import sys
 from time import sleep
 
+
 def test(pkgname):
     os.system("adb uninstall com.gpuskin.test")
     script_directory = os.path.dirname(os.path.abspath(__file__))
