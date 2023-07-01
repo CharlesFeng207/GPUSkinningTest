@@ -12,17 +12,6 @@
             "console": "integratedTerminal",
             "justMyCode": true
         },
-        {   
-            "name": "Python: RunTest",
-            "type": "python",
-            "request": "launch",
-            "program": "RunTest.py",
-            "args": [
-                "Adam-CPUSkin;Adam-ComputeSkin"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
         {
             "name": "Unity Editor",
             "type": "unity",

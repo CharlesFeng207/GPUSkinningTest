@@ -8,21 +8,17 @@ def connect(client):
     client.connect_device_by_name('KB2000')
     client.get_all_apps()
 
-def collect(client):
-    t1 = threading.Thread(target=client.collect_perf_data, name='collect_perf_data')
-    t2 = threading.Thread(target=client.collect_cap_data, name='collect_cap_data')
+def collect(client, args):
+    t1 = threading.Thread(target=client.collect_perf_data, name='collect_perf_data', args=args)
+    t2 = threading.Thread(target=client.collect_cap_data, name='collect_cap_data', args=args)
     t1.start()
     t2.start()
     t1.join()
     t2.join()
 
 
-def run():
+def run(pkgname, duration):
+    args = [pkgname, duration]
     client = PerfServiceClient()
     connect(client)
-    collect(client)
-    client.disconnect()
-
-run()
-time.sleep(3)
-run()
+    collect(client, args)

@@ -14,17 +14,19 @@ capture_data_uri = "ws://{0}:{1}/CollectCaptureData".format(HOST, PORT)
 
 # 开始和停止测试采集性能数据的命令
 data_start = {"action": "startCollect",
-              "appName": "Adam-ComputeSkin(com.gpuskin.test)"}
+              "appName": ""}
 data_stop = {"action": "stopCollect"}
 
 # 开始和停止采集截图的命令
 cap_start = {"action": "startCapture"}
 cap_stop = {"action": "stopCapture"}
 
-def request_get(url, params=None):
+def request_get(url, params=None, log=True):
     print(url)
     result = requests.get(url, params).json()
-    print(result)
+    if log: 
+        print(result)
+
     return result
 
 class PerfServiceClient:
@@ -40,15 +42,26 @@ class PerfServiceClient:
         self.perf_ws = create_connection(perf_data_uri)  # 用来获取性能数据的websocket
         self.cap_ws = create_connection(capture_data_uri)  # 用来获取截图数据的websocket
 
-    
 
-    def collect_perf_data(self):
+    def collect_perf_data(self, packageName, duration):
+
+        found_item = next((item for item in self.apps['data'] if item["packageName"] == packageName), None)
+        if not found_item:
+            print("app no found")
+            return
+
+        print(found_item)
+
+        data_start['appName'] = found_item['appName']
+        
         data = True
         self.perf_ws.send(json.dumps(data_start))
+        print('collect_perf_data...')
+
         while data:
             data = self.perf_ws.recv()
             data = json.loads(data)
-            print(data)
+            
             if 'stopCollect' in data:
                 self.current_time = -1
                 data = False
@@ -62,25 +75,35 @@ class PerfServiceClient:
                 #     self.start_subscene('TikTok子场景')
                 # if self.current_time == 15:
                 #     self.stop_subscene()
-                if self.current_time == 9:
+                if self.current_time == duration:
                     self.stop_record()
-                if self.current_time == 10:
+                if self.current_time == duration + 1:
                     self.perf_ws.send(json.dumps(data_stop))
 
-    def collect_cap_data(self):
+        print('collect_perf_data terminate')
+        self.perf_ws.close()
+        self.perf_ws = None
+
+    def collect_cap_data(self, packageName, duration):
         data = True
         while self.current_time < 0:
             time.sleep(1)
         self.cap_ws.send(json.dumps(cap_start))
+
+        print('collect_cap_data...')
         while data:
             data = self.cap_ws.recv()
             data = json.loads(data)
-            print(data)
+            # print(data)
             if 'stopCapture' in data:
                 data = None
-            if self.current_time > 9:
+            if self.current_time >= duration - 1:
                 self.cap_ws.send(json.dumps(cap_stop))
             time.sleep(1)
+        
+        print('collect_cap_data terminate')
+        self.cap_ws.close()
+        self.cap_ws = None
 
     # 开始记录
     def start_record(self):
@@ -105,7 +128,7 @@ class PerfServiceClient:
 
     # 获取所有应用
     def get_all_apps(self):
-        self.apps = request_get('{0}/getAllApps'.format(http_prefix))
+        self.apps = request_get('{0}/regainAllApps'.format(http_prefix), False)
 
     # 获取所有设备
     def get_all_devices(self):
@@ -128,10 +151,3 @@ class PerfServiceClient:
     def upload_data(self, json_path):
         return request_get('{0}/uploadData'.format(http_prefix), params={'jsonPath': json_path})
     
-    def disconnect(self):
-        print("disconnect")
-        self.cap_ws.close()
-        self.cap_ws = None
-
-        self.perf_ws.close()
-        self.perf_ws = None

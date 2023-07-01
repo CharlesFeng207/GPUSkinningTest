@@ -49,6 +49,7 @@ public static class BuildAll
 
     private static void Build(string name)
     {
+        name += "TwoPass";
         EditorUtility.SetDirty(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("Assets/TestSkinning.unity"));
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -60,7 +61,7 @@ public static class BuildAll
 
     private static void RunTest()
     {
-        RunCmd($"python RunTest.py {string.Join(";", Builds)}");
+        RunCmd($"python RunTest.py");
     }
 
     private static void RunCmd(string cmd)
