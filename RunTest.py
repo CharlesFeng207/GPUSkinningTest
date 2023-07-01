@@ -3,21 +3,24 @@ import sys
 from time import sleep
 import Gameperf
 
+pkgname = "com.gpuskin.test"
+pkgactivity = "{0}/{0}.MainActivity".format(pkgname)
+
 def cmd(cmd):
     print(cmd)
     os.system(cmd)
 
 def test(pkgpath):
-    cmd("adb uninstall com.gpuskin.test")
+    cmd(f"adb uninstall {pkgname}")
     cmd("adb install " + pkgpath)
     run()
     pass
 
 def run():
-    cmd("adb shell am start -n com.gpuskin.test/com.gpuskin.test.MainActivity")
-    Gameperf.run('com.gpuskin.test', 10)
+    cmd(f"adb shell am start -n {pkgactivity}")
+    Gameperf.run(pkgname, 15)
     # sleep(3)
-    cmd("adb shell am force-stop com.gpuskin.test")
+    cmd(f"adb shell am force-stop {pkgname}")
     pass
 
 if __name__ == "__main__":
@@ -29,6 +32,6 @@ if __name__ == "__main__":
             continue
         test(os.path.join(build_directory, filename))        
         pass
-    
+
     input("Press Enter to continue...")
     pass

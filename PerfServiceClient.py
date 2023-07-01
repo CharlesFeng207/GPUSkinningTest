@@ -68,7 +68,7 @@ class PerfServiceClient:
             elif 'time' in data:
                 self.current_time = int(data['time'])
                 if self.current_time == 0:
-                    self.set_scene('自动化测试')
+                    self.set_scene(data_start['appName'])
                 if self.current_time == 2:
                     self.start_record()
                 # if self.current_time == 10:
