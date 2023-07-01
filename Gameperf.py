@@ -3,9 +3,9 @@ import time
 from PerfServiceClient import PerfServiceClient
 import threading
 
-def connect(client):
+def init(client):
     client.get_all_devices()
-    client.connect_device_by_name('KB2000')
+    client.connect_any_android_device()
     client.get_all_apps()
 
 def collect(client, args):
@@ -20,5 +20,5 @@ def collect(client, args):
 def run(pkgname, duration):
     args = [pkgname, duration]
     client = PerfServiceClient()
-    connect(client)
+    init(client)
     collect(client, args)

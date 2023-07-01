@@ -126,6 +126,13 @@ class PerfServiceClient:
             return
         self.connect_device(found_item['udid'])
 
+    def connect_any_android_device(self):
+        found_item = next((item for item in self.devices["data"] if item["type"] == 'ANDROID'), None)
+        if not found_item:
+            print("device no found")
+            return
+        self.connect_device(found_item['udid'])
+
     # 获取所有应用
     def get_all_apps(self):
         self.apps = request_get('{0}/regainAllApps'.format(http_prefix), False)

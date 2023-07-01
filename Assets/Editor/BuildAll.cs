@@ -44,12 +44,12 @@ public static class BuildAll
         Tester.EnableInstancing = true;
         Build("Mannequin-GPUSkin-Batched");
 
-        RunTest();
+        // RunTest();
     }
 
     private static void Build(string name)
     {
-        name += "TwoPass";
+        // name += "TwoPass";
         EditorUtility.SetDirty(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("Assets/TestSkinning.unity"));
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();

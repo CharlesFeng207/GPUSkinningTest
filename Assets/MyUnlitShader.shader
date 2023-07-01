@@ -50,18 +50,18 @@
         Tags { "RenderType"="Opaque" }
         LOD 100
         
-        Pass
-		{
-			Blend SrcAlpha One
-			ZWrite Off
-			ZTest Greater
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag_xray
-			#pragma multi_compile_instancing
-			#pragma multi_compile ROOTON_BLENDOFF ROOTON_BLENDON_CROSSFADEROOTON ROOTON_BLENDON_CROSSFADEROOTOFF ROOTOFF_BLENDOFF ROOTOFF_BLENDON_CROSSFADEROOTON ROOTOFF_BLENDON_CROSSFADEROOTOFF
-			ENDCG
-		}
+        // Pass
+		// {
+		// 	Blend SrcAlpha One
+		// 	ZWrite Off
+		// 	ZTest Greater
+		// 	CGPROGRAM
+		// 	#pragma vertex vert
+		// 	#pragma fragment frag_xray
+		// 	#pragma multi_compile_instancing
+		// 	#pragma multi_compile ROOTON_BLENDOFF ROOTON_BLENDON_CROSSFADEROOTON ROOTON_BLENDON_CROSSFADEROOTOFF ROOTOFF_BLENDOFF ROOTOFF_BLENDON_CROSSFADEROOTON ROOTOFF_BLENDON_CROSSFADEROOTOFF
+		// 	ENDCG
+		// }
 
         Pass
         {
