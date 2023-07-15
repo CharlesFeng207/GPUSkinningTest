@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Tester : MonoBehaviour
 {
     public GameObject Prefab;
@@ -12,6 +13,8 @@ public class Tester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        
         GPUSkinningPlayerResources.EnableInstancing = EnableInstancing;
         Application.targetFrameRate = 60;
 

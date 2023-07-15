@@ -22,6 +22,8 @@ public static class BuildAll
         Tester.Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Adam.prefab");
         PlayerSettings.gpuSkinning = false;
         Build("Adam-CPUSkin");
+
+#if false
         PlayerSettings.gpuSkinning = true;
         Build("Adam-ComputeSkin");
 
@@ -43,8 +45,8 @@ public static class BuildAll
         Build("Mannequin-GPUSkin");
         Tester.EnableInstancing = true;
         Build("Mannequin-GPUSkin-Batched");
-
-        // RunTest();
+#endif
+        RunTest();
     }
 
     private static void Build(string name)
