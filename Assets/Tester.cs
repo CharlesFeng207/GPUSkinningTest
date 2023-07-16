@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using PerfToolkit;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 public class Tester : MonoBehaviour
 {
@@ -13,8 +13,6 @@ public class Tester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        
         GPUSkinningPlayerResources.EnableInstancing = EnableInstancing;
         Application.targetFrameRate = 60;
 
@@ -25,11 +23,16 @@ public class Tester : MonoBehaviour
             pos.y = 0;
             go.transform.localPosition = pos;
         }
+        
+        Shell.Init();
+        Debug.Log(Shell.TestSelf());
+        
+        // Shell.Execute("UnityEngine.GameObject.Find(\"Main Camera\").SetActive(false)");
+        // var t = UnityEngine.GameObject.Find("Main Camera");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnApplicationQuit()
     {
-        
+        Shell.DeInit();
     }
 }

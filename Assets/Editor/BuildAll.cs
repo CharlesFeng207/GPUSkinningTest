@@ -11,13 +11,10 @@ using Debug = UnityEngine.Debug;
 public static class BuildAll
 {
     public static Tester Tester => GameObject.FindObjectOfType<Tester>();
-    private static List<string> Builds = new List<string>();
 
     [MenuItem("BuildAll/Start &B")]
     public static void Start()
     {
-        Builds.Clear();
-
         Tester.Count = 1000;
         Tester.Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Adam.prefab");
         PlayerSettings.gpuSkinning = false;
@@ -46,7 +43,7 @@ public static class BuildAll
         Tester.EnableInstancing = true;
         Build("Mannequin-GPUSkin-Batched");
 #endif
-        RunTest();
+        // RunTest();
     }
 
     private static void Build(string name)
@@ -58,7 +55,6 @@ public static class BuildAll
         PlayerSettings.applicationIdentifier = "com.gpuskin.test";
         PlayerSettings.productName = name;
         BuildPipeline.BuildPlayer(new[] { "Assets/TestSkinning.unity" }, Path.Combine("Build", name + ".apk"), BuildTarget.Android, BuildOptions.Development);
-        Builds.Add(name);
     }
 
     private static void RunTest()
