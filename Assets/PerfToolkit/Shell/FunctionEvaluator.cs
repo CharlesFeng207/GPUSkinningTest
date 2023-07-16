@@ -248,22 +248,40 @@ namespace PerfToolkit
         {
             ExtractFunctionCall(code, out var methodName, out var parameterStr);
 
-            var method = targetType.GetMethod(methodName);
-            ParameterInfo[] parameterInfo = method.GetParameters();
-            object[] parameters = new object[parameterInfo.Length];
-
-            for (int i = 0; i < parameterInfo.Length; i++)
+            var methods = targetType.GetMethods();
+            foreach (var method in methods)
             {
-                parameters[i] = Convert.ChangeType(parameterStr[i], parameterInfo[i].ParameterType);
+                if(method.Name != methodName)
+                    continue;
+                
+                ParameterInfo[] parameterInfo = method.GetParameters();
+                if(parameterInfo.Length != parameterStr.Length)
+                    continue;
+                
+                object[] parameters = new object[parameterInfo.Length];
+                
+                try
+                {
+                    for (int i = 0; i < parameterInfo.Length; i++)
+                    {
+                        parameters[i] = Convert.ChangeType(parameterStr[i], parameterInfo[i].ParameterType);
+                    }
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+                
+                return method.Invoke(targetInstance, parameters);    
             }
-
-            return method.Invoke(targetInstance, parameters);
+            
+            throw new Exception($"Can't find method {targetType} {methodName} {parameterStr}");
         }
 
         private void ExtractFunctionCall(string code, out string methodName, out string[] parameter)
         {
             var startIndex = code.IndexOf('(');
-            var endIndex = code.IndexOf(')');
+            var endIndex = code.LastIndexOf(')');
             methodName = code.Substring(0, startIndex).Trim();
             var parameterStr = code.Substring(startIndex + 1, endIndex - startIndex - 1).Replace("\"", "").Trim();
             if (string.IsNullOrEmpty(parameterStr))

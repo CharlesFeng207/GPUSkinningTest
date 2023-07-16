@@ -2,4 +2,5 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\Charles\Repos\GPUSkinningTest\Library\ScriptAssemblies\Assembly-CSharp.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2022.3.2f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files\Unity\Hub\Editor\2022.3.2f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

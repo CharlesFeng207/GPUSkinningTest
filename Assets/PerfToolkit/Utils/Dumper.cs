@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -90,13 +91,45 @@ namespace PerfToolkit
             else if (t.IsClass)
             {
                 TextBuilder.Append(t.Name);
-                TextBuilder.Append(" ");
-                TextBuilder.Append(JsonUtility.ToJson(obj, false));
+                TextBuilder.Append("{");
+                DumpClassObject(t, obj);
+                TextBuilder.Append("}");
             }
             else
             {
                 Debug.LogWarning($"unsupported type: {t.FullName}");
                 TextBuilder.Append(obj);
+            }
+        }
+
+        private static void DumpClassObject(Type objectType, object target)
+        {
+            PropertyInfo[] properties = objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo property in properties)
+            {
+                try
+                {
+                    object value = property.GetValue(target);   
+                    TextBuilder.Append($"{property.Name}={value} ");
+                }
+                catch (Exception e)
+                {
+                    TextBuilder.Append($"{property.Name}=? ");
+                }
+            }
+            
+            FieldInfo[] fieldInfos = objectType.GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach (FieldInfo fieldInfo in fieldInfos)
+            {
+                try
+                {
+                    object value = fieldInfo.GetValue(target);
+                    TextBuilder.Append($"{fieldInfo.Name}={value} ");
+                }
+                catch (Exception e)
+                {
+                    TextBuilder.Append($"{fieldInfo.Name}=? ");
+                }
             }
         }
     }

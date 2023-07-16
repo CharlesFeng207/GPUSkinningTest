@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -6,15 +7,14 @@ namespace PerfToolkit
 {
     public static class Shell
     {
-        [System.Serializable]
-        public class Message
-        {
-            public int ErrorCode;
-            public string Info;
-        }
-
         private static FunctionEvaluator m_FunctionEvaluator;
         private static UdpHost m_UdpHost;
+
+        public static int MTU
+        {
+            get => m_UdpHost.MTU;
+            set => m_UdpHost.MTU = value;
+        }
 
         public static void Init(int port = 9999)
         {
@@ -73,12 +73,23 @@ namespace PerfToolkit
                 
                 Execute("TestEvaluator.GetInstance()");
                 
-                return "ok";
+                return "Test Complete!";
             }
             catch (Exception e)
             {
                 return $"{e.Message}\n{e.StackTrace}";
             }
+        }
+
+        public static string TestLargeStr(int count = 1000)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < count; i++)
+            {
+                sb.AppendLine($"TestLargeStr: {i}");
+            }
+
+            return sb.ToString();
         }
 
         public static void DeInit()
@@ -88,17 +99,12 @@ namespace PerfToolkit
 
         private static void OnMessageReceived(string code)
         {
-            var b = m_FunctionEvaluator.Execute(code, out var returnObj);
-            var message = new Message()
-            {
-                ErrorCode = b ? 0 : 1,
-                Info = Dumper.Do(returnObj)
-            };
-
-            var text = JsonUtility.ToJson(message);
-            Debug.Log($"Shell Execute: {code}\n{text}");
-
-            m_UdpHost.Send(text);
+            if(string.IsNullOrEmpty(code)) return;
+            
+            m_FunctionEvaluator.Execute(code, out var returnObj);
+            var msg = returnObj == null ? "ok" : returnObj.ToString();
+            Debug.Log($"Shell Execute: {code}\n{returnObj}");
+            m_UdpHost.Send(msg);
         }
 
         public static object Execute(string code)

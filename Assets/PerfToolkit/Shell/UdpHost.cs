@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,6 +9,7 @@ namespace PerfToolkit
 {
     public class UdpHost
     {
+        public int MTU = 10000;
         public event Action<string> MessageReceived;
         private readonly UdpClient m_UdpClient;
         
@@ -24,8 +24,25 @@ namespace PerfToolkit
         {
             m_UdpClient = new UdpClient(localPort);
         }
-        
+
         public void Send(string message)
+        {
+            if (message.Length < MTU)
+            {
+                _Send(message);
+            }
+            else
+            {
+                var total = Mathf.CeilToInt(message.Length / (float) MTU);
+                for (int i = 0; i < total; i++)
+                {
+                    var index = i * MTU;
+                    var len = Mathf.Min(MTU, message.Length - index);
+                    _Send(message.Substring(index, len));
+                }
+            }
+        }
+        private void _Send(string message)
         {
             var buffer = Encoding.UTF8.GetBytes(message);
             lock (this)
