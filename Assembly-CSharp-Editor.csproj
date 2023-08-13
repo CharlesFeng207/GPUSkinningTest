@@ -49,6 +49,10 @@
      <Compile Include="Assets\GPUSkinning\Editor\GPUSkinningStandardShaderGUI.cs" />
      <Compile Include="Assets\GPUSkinning\Editor\GPUSkinningSamplerEditor.cs" />
      <Compile Include="Assets\Editor\BuildAll.cs" />
+     <Compile Include="Assets\Editor\CheckMeshSetting.cs" />
+     <Compile Include="Assets\Editor\FindUnusedMeshAttr.cs" />
+     <Compile Include="Assets\Editor\TestEditor.cs" />
+     <Folder Include="Assets\RShell\Editor" />
      <Folder Include="Assets\GPUSkinning\Editor" />
      <Folder Include="Assets\Editor" />
      <Reference Include="UnityEngine">

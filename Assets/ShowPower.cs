@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using PerfToolkit;
 using UnityEngine;
 
 public class ShowPower : MonoBehaviour

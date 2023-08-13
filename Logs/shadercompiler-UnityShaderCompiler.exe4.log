@@ -1,0 +1,15 @@
+Base path: 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1c1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1c1/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+
+Cmd: disassembleShader
+ name=Unlit/MyUnlitShader platform=gles3 type=4 mask=6 insize=1954 outsize=1954 ok=1
+
+Cmd: disassembleShader
+ name=Legacy Shaders/Diffuse platform=gles3 type=4 mask=6 insize=3248 outsize=3248 ok=1
+
+Cmd: disassembleShader
+ name=Legacy Shaders/Diffuse platform=gles3 type=4 mask=6 insize=6082 outsize=6082 ok=1
+
+Cmd: disassembleShader
+ name=Legacy Shaders/Diffuse platform=gles3 type=4 mask=6 insize=4301 outsize=4301 ok=1
+

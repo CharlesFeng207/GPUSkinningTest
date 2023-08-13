@@ -1,0 +1,42 @@
+{
+    "Items": [
+        {
+            "MeshName": "mesh_Crowd_LOD_01",
+            "AssetPath": "Assets/GPUSkinning/Res/Adam/Adam.FBX",
+            "UnusedAttributes": [
+                1,
+                2,
+                12,
+                13
+            ]
+        },
+        {
+            "MeshName": "GPUSKinning_Mesh_AdamAnim",
+            "AssetPath": "Assets/GPUSkinning/Scenes/Adam_Sampler/GPUSKinning_Mesh_AdamAnim.asset",
+            "UnusedAttributes": [
+                1,
+                2
+            ]
+        },
+        {
+            "MeshName": "SK_Mannequin",
+            "AssetPath": "Assets/GPUSkinning/Res/Mannequin/SK_Mannequin.FBX",
+            "UnusedAttributes": [
+                1,
+                2,
+                3,
+                12,
+                13
+            ]
+        },
+        {
+            "MeshName": "GPUSKinning_Mesh_MannequinAnim",
+            "AssetPath": "Assets/GPUSkinning/Scenes/Mannequin_Sampler/GPUSKinning_Mesh_MannequinAnim.asset",
+            "UnusedAttributes": [
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+}

@@ -1,5 +1,4 @@
-﻿using System;
-using PerfToolkit;
+﻿
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,8 +23,8 @@ public class Tester : MonoBehaviour
             go.transform.localPosition = pos;
         }
 
-        Shell.Init();
-        Debug.Log(Shell.TestSelf()); 
+        RShell.Shell.Listen();
+        Debug.Log(RShell.Shell.TestSelf()); 
     }
 
     public string TestFunc()
@@ -33,8 +32,5 @@ public class Tester : MonoBehaviour
         return "TestFunc";
     }
 
-    private void OnApplicationQuit()
-    {
-        Shell.DeInit();
-    }
+    
 }
